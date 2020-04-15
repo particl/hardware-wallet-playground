@@ -118,6 +118,13 @@ make node=stake command="getnetworkinfo" rpc
 
 Only available as long as the test environment is up.
 
+### make model=[ nanos ] vnc
+Opens instance of `vncviewer` to the device for manual inspection.
+
+```
+make model=nanos vnc
+```
+
 ## Firmware Supported
 
 | Brand         | Model         | Supported     |
@@ -156,8 +163,9 @@ This simplifies the bootstrapping process for new developers and provides an add
 ### Docker Compose File
 The orchestration of the test environment is provided by `docker/test-compose.yaml`.
 
-The compose file will spin up a network of:
+The compose file will spin up a network of multiple containers:
 - 1 Ledger NanoS emulator
+    * `ledger-speculos-nanos`: 
 - 1 Trezor One emulator
 - 3 particl-core daemons:
     * `core-stake-node`: this node is responsible for generating blocks on the regnet.

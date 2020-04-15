@@ -27,7 +27,7 @@ command = "help"
 endif
 
 # Get only the variables with plain names
-interesting_variables = target core_src ledger_app_src ledger_emulator_src trezor_src node command
+interesting_variables = target model node command core_src ledger_app_src ledger_emulator_src trezor_src
 settings = $(foreach v,$(interesting_variables),$(v)=$($(v)))
 
 init : 
@@ -35,7 +35,7 @@ init :
 build : 
 	$(settings) ./scripts/build.sh
 test : 
-	$(settings) ./scripts/build.sh
+	# $(settings) ./scripts/build.sh
 	$(settings) ./scripts/test.sh
 clean :
 	$(settings) ./scripts/clean.sh
@@ -43,5 +43,7 @@ rpc :
 	$(settings) ./scripts/rpc.sh
 shell :
 	$(settings) ./scripts/shell.sh
+vnc :
+	$(settings) ./scripts/vnc.sh
 echo :
 	echo '$(settings)'

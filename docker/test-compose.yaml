@@ -8,10 +8,10 @@ services:
   ###################################
   ##             LEDGER            ##
   ###################################
-  ledger-speculos-nanos:
-    image: particl/speculos
+  ledger-emulator-nanos:
+    image: particl/run-ledger-emulator
     volumes:
-      - ./bins/ledger-app-particl:/speculos/apps
+      - ../bins/ledger-app-particl:/speculos/apps
     ports:
       - "1234:1234"
       - "40000:40000" # apdu
