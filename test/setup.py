@@ -1,0 +1,1 @@
+# TODO: write a function each type of node to do the setup.

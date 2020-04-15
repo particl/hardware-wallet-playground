@@ -31,6 +31,7 @@ A docker-compose is used to setup the test environment.
 ## Table Of Contents
 - [Installation](https://github.com/particl/hardware-wallet-playground#Installation)
 - [Usage](https://github.com/particl/hardware-wallet-playground#Usage)
+- [Firmware Supported](https://github.com/particl/hardware-wallet-playground#Firmware-Supported)
 - [Folder Layout](https://github.com/particl/hardware-wallet-playground#Folder-Layout)
 - [Docker Information](https://github.com/particl/hardware-wallet-playground#Docker-Information)
 
@@ -115,19 +116,41 @@ make node=stake command="getnetworkinfo" rpc
 
 Only available as long as the test environment is up.
 
-## Folder Structure
+## Firmware Supported
+
+| Brand         | Model         | Supported     |
+| ------------- | ------------- | ------------- |
+| **Trezor**    | Trezor One    | WIP           |
+| **Trezor**    | Trezor T      | WIP           |
+| **Ledger**    | NanoS         | WIP           |
+| **Ledger**    | NanoX         | WIP           |
+
+## Folder Layout
 * `src/` contains all the source repositories cloned through git. You can directly work & edit in these.
 * `bin/` contains the particl-core binary & emulator firmware.
 * `scripts/` contains all the scripts that you can execute through the `make` commands.
 * `docker/` contains all docker files to build & run each repo in src/ & a docker-compose file for the test environment.
 * `configs/` contains the datadirectory for particl-core (which is binded to the container in the testing orchestration)
+* `test/` contains all the tests & test related utilities.
 
 ## Docker Information
 All processes (compiling source codes & executing tests) runs inside docker containers that are orchestrated using docker-compose.
 This simplifies the bootstrapping process for new developers and provides an additional level of security to protect your host system.
 
 ### Docker Files
-* `build-legder-app-particl`: builds the ledger app firmware (when **executing** the docker container) and stores the binary under `bin/` as `particl.elf`
-* `build-particl-core`: builds particl-core daemon and cli (when **executing** the docker container) and stores the binaries under `bin/` as `particld` & `particl-cli`.
-* `run-particl-core`: runs particl-core daemon (particld), binaries & data directory must be mounted inside as (`particld` + `particl-cli`) & `/data` respectively.
-* `run-tests`: sets up the wallet & connects the right particl-core instances with their respective hardware emulator. Afterward, run test suite against the particl-core daemons.
+* `build-legder-app-particl`: 
+    builds the ledger app firmware (when **executing** the docker container) and stores the binary under `bin/` as `particl.elf`
+* `build-particl-core`:
+    builds particl-core daemon and cli (when **executing** the docker container) and stores the binaries under `bin/` as `particld` & `particl-cli`.
+* `run-particl-core`:
+    runs particl-core daemon (particld), binaries & data directory must be mounted inside as (`particld` + `particl-cli`) & `/data` respectively.
+* `run-tests`:
+    sets up the wallet & connects the right particl-core instances with their respective hardware emulator. Afterward, run test suite against the particl-core daemons.
+
+### Docker Compose File
+The orchestration of the test environment is provided by `docker/test-compose.yaml`.
+The compose file will spin up a network of:
+3 particl-core daemons:
+* `core-stake-node`: this node is responsible for generating blocks on the regnet.
+* `core-ledger-nanos-node`: this node is connected with the Ledger NanoS emulator & can be tested against.
+* `core-trezor-one-node`: this node is connected with the Trezor One emulator & can be tested against.

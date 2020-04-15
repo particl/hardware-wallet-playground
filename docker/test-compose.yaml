@@ -45,13 +45,13 @@ services:
       - "19792:19792"
     networks:
       - hw-wallet-network
-  #  [  LEDGER WALLET NODE   ]
-  # The particl-core "ledger" node is connected to the speculos emulator.
-  core-ledger-node:
+  #  [  LEDGER (NANO S) WALLET NODE   ]
+  # The particl-core "ledger" node is connected to the speculos emulator (Nano S).
+  core-ledger-nanos-node:
     image: particl/run-particl-core:latest
     volumes:
       - type: bind
-        source: ../configs/core-datadir-ledger
+        source: ../configs/core-datadir-ledger-nanos
         target: /data
       - type: bind
         source: ../bins/particld
@@ -69,11 +69,11 @@ services:
       - hw-wallet-network
   #  [  TREZOR WALLET NODE   ]
   # The particl-core "trezor" node is conencted to the trezor emulator.
-  core-trezor-node:
+  core-trezor-one-node:
     image: particl/run-particl-core:latest
     volumes:
       - type: bind
-        source: ../configs/core-datadir-trezor
+        source: ../configs/core-datadir-trezor-one
         target: /data
       - type: bind
         source: ../bins/particld

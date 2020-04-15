@@ -1,5 +1,9 @@
 # Testing
 
+## Table Of Contents
+- [Usage](https://github.com/particl/hardware-wallet-playground/test#Usage)
+- [Folder Layout](https://github.com/particl/hardware-wallet-playground/test#Folder-Layout)
+
 ## Usage 
 Everything is executed inside the test container which executes RPC commands against the particl-core daemon containers.
 

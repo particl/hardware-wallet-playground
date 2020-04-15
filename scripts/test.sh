@@ -19,7 +19,7 @@ fi
 echo "##################################### [   CLEARING   ] #######################################"
 rm -rf configs/core-datadir-*/regtest
 mkdir configs/core-datadir-stake/regtest
-mkdir configs/core-datadir-ledger/regtest
+mkdir configs/core-datadir-ledger-nanos/regtest
 mkdir configs/core-datadir-trezor/regtest
 
 echo "##################################### [   TESTING   ] #######################################"
