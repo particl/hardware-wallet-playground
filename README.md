@@ -59,7 +59,7 @@ Clones all the required repositories into the subdirectories & writes it to the 
 make init
 ```
 
-### make target=[all | core | trezor | ledger] build
+### make target=[all | core | ledger | trezor] build
 Builds everything (default target = all):
 ```
 make build
@@ -70,7 +70,7 @@ Builds a specific target:
 make target=core build
 ```
 
-### make target=[all | trezor | ledger] test
+### make target=[all | ledger | trezor] test
 Executes build command on core (+ specified target) first.
 Boots up the containers (emulators & particl-core). Once an emulator container is up and running, it will add that emulator to particl-core and run the respective test suite (ledger / trezor).
 Tests against the different emulators are ran sequentially.
@@ -86,7 +86,7 @@ Test a specific target:
 make target=ledger test
 ```
 
-### make target=[all | core | trezor | ledger] clean
+### make target=[all | core | ledger | trezor] clean
 Runs make clean in every source folder.
 
 Cleans everything (default target = all):
@@ -118,7 +118,7 @@ make node=stake command="getnetworkinfo" rpc
 
 Only available as long as the test environment is up.
 
-### make model=[ nanos ] vnc
+### make model=[nanos] vnc
 Opens instance of `vncviewer` to the device for manual inspection.
 
 ```
@@ -129,10 +129,10 @@ make model=nanos vnc
 
 | Brand         | Model         | Supported     |
 | ------------- | ------------- | ------------- |
-| **Trezor**    | Trezor One    | WIP           |
-| **Trezor**    | Trezor T      | WIP           |
 | **Ledger**    | NanoS         | WIP           |
 | **Ledger**    | NanoX         | WIP           |
+| **Trezor**    | Trezor One    | WIP           |
+| **Trezor**    | Trezor T      | WIP           |
 
 ## Folder Layout
 * `src/` contains all the source repositories cloned through git. You can directly work & edit in these.
