@@ -37,9 +37,11 @@ A docker-compose is used to setup the test environment.
 
 ## Installation
 * This playground is only available for linux.
-* Install Git
-* Install Docker (https://docs.docker.com/install/linux/docker-ce/debian/)
-* Install Docker Compose
+
+Requirements:
+* Git
+* [Docker](https://docs.docker.com/install/linux/docker-ce/debian/)
+* [Docker Compose](https://docs.docker.com/compose/install/)
 
 ```
 git clone https://github.com/particl/hardware-wallet-playground.git
@@ -149,8 +151,11 @@ This simplifies the bootstrapping process for new developers and provides an add
 
 ### Docker Compose File
 The orchestration of the test environment is provided by `docker/test-compose.yaml`.
+
 The compose file will spin up a network of:
-3 particl-core daemons:
-* `core-stake-node`: this node is responsible for generating blocks on the regnet.
-* `core-ledger-nanos-node`: this node is connected with the Ledger NanoS emulator & can be tested against.
-* `core-trezor-one-node`: this node is connected with the Trezor One emulator & can be tested against.
+- 1 Ledger NanoS emulator
+- 1 Trezor One emulator
+- 3 particl-core daemons:
+    * `core-stake-node`: this node is responsible for generating blocks on the regnet.
+    * `core-ledger-nanos-node`: this node is connected with the Ledger NanoS emulator & can be tested against.
+    * `core-trezor-one-node`: this node is connected with the Trezor One emulator & can be tested against.
