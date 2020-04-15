@@ -36,9 +36,9 @@ A docker-compose is used to setup the test environment.
 - [Docker Information](https://github.com/particl/hardware-wallet-playground#Docker-Information)
 
 ## Installation
-* This playground is only available for linux.
+This playground is only available for linux.
 
-Requirements:
+**Requirements**:
 * Git
 * [Docker](https://docs.docker.com/install/linux/docker-ce/debian/)
 * [Docker Compose](https://docs.docker.com/compose/install/)
