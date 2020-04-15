@@ -140,14 +140,18 @@ All processes (compiling source codes & executing tests) runs inside docker cont
 This simplifies the bootstrapping process for new developers and provides an additional level of security to protect your host system.
 
 ### Docker Files
-* `build-legder-app-particl`: 
-    builds the ledger app firmware (when **executing** the docker container) and stores the binary under `bin/` as `particl.elf`
-* `build-particl-core`:
-    builds particl-core daemon and cli (when **executing** the docker container) and stores the binaries under `bin/` as `particld` & `particl-cli`.
-* `run-particl-core`:
-    runs particl-core daemon (particld), binaries & data directory must be mounted inside as (`particld` + `particl-cli`) & `/data` respectively.
-* `run-tests`:
-    sets up the wallet & connects the right particl-core instances with their respective hardware emulator. Afterward, run test suite against the particl-core daemons.
+- `build-legder-app-particl`: 
+    * builds the ledger app firmware (when **executing** the docker container)
+    * stores the binary under `bin/` as `particl.elf`
+- `build-particl-core`:
+    * builds particl-core daemon and cli (when **executing** the docker container) 
+    * stores the binaries under `bin/` as `particld` & `particl-cli`.
+- `run-particl-core`:
+    * binaries & data directory must be mounted inside as (`particld` + `particl-cli`) & `/data` respectively.
+    * runs particl-core daemon (particld), 
+- `run-tests`:
+    * *Setup*: sets up the wallet & connects the right particl-core instances with their respective hardware emulator. 
+    * *Testing*: runs test suite against the particl-core daemons.
 
 ### Docker Compose File
 The orchestration of the test environment is provided by `docker/test-compose.yaml`.
