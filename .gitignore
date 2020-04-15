@@ -1,0 +1,4 @@
+src/*
+bins/*
+configs/*/regtest
+test/functional/test_framework

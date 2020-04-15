@@ -1,0 +1,91 @@
+version: '3.7'
+
+networks:
+  hw-wallet-network:
+    name: hw-wallet-network
+    
+services:
+  ###################################
+  ##             LEDGER            ##
+  ###################################
+  ledger-speculos-nanos:
+    image: particl/speculos
+    volumes:
+      - ./bins/ledger-app-particl:/speculos/apps
+    ports:
+      - "1234:1234"
+      - "40000:40000" # apdu
+      - "41000:41000" # vnc
+      - "42000:42000" # tcp buttons
+    command: "--model nanos ./apps/app.elf --sdk 1.6 --seed secret --display headless --apdu-port 40000 --vnc-port 41000 --button-port 42000"
+
+  ###################################
+  ##              CORE             ##
+  ###################################
+  # Boot up the Particl Core (regnet)
+  # The particl-core "stake" node generates blocks for the regnet.
+  #  [  STAKING NODE   ]
+  core-stake-node:
+    image: particl/run-particl-core:latest
+    volumes:
+      - type: bind
+        source: ../configs/core-datadir-stake
+        target: /data
+      - type: bind
+        source: ../bins/particld
+        target: /particld
+      - type: bind
+        source: ../bins/particl-cli
+        target: /particl-cli
+      - type: bind
+        source: ../tests
+        target: /tests
+    ports:
+      - "14792:14792"
+      - "19792:19792"
+    networks:
+      - hw-wallet-network
+  #  [  LEDGER WALLET NODE   ]
+  # The particl-core "ledger" node is connected to the speculos emulator.
+  core-ledger-node:
+    image: particl/run-particl-core:latest
+    volumes:
+      - type: bind
+        source: ../configs/core-datadir-ledger
+        target: /data
+      - type: bind
+        source: ../bins/particld
+        target: /particld
+      - type: bind
+        source: ../bins/particl-cli
+        target: /particl-cli
+      - type: bind
+        source: ../tests
+        target: /tests
+    ports:
+      - "14793:14792"
+      - "19793:19792"
+    networks:
+      - hw-wallet-network
+  #  [  TREZOR WALLET NODE   ]
+  # The particl-core "trezor" node is conencted to the trezor emulator.
+  core-trezor-node:
+    image: particl/run-particl-core:latest
+    volumes:
+      - type: bind
+        source: ../configs/core-datadir-trezor
+        target: /data
+      - type: bind
+        source: ../bins/particld
+        target: /particld
+      - type: bind
+        source: ../bins/particl-cli
+        target: /particl-cli
+      - type: bind
+        source: ../tests
+        target: /tests
+    ports:
+      - "14794:14792"
+      - "19794:19792"
+    networks:
+      - hw-wallet-network
